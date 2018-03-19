@@ -1,3 +1,3 @@
 # duaxe1
 #include
-int main()
+int main(){}
