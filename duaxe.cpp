@@ -1,18 +1,28 @@
-#include<iostream>
-#include<stdio.h>
 #include<time.h>
 #include"hamtienich.h"
-#include"cackieudulieumoi.h"
-#include"cachamsulygamechinh.h"
+#include"kieudulieumoi.h"
+#include"cachamxulyxechinh.h"
 #include"khoitao.h"
-using namespace std;
-#define consoleHeight 25
-#define ROAD 41
 
-int main(){
-    xedua xe;
-    vatcan vc[3];
-    char a[25][42];
+int main()
+{
+    string help;
+    help=Help();
+    while(true)
+    {
+        clrscr();
+        cout <<help;
+        string key;
+        cin >>key;
+        if(key=="A" ||key=="a")
+            break;
+    }
+    clrscr();
+    Race_Car car;
+    hindrance dike[3],life;
+    char racetrack[consoleHeight][ROAD+1];
+    drawing_table drawing_table;
+
     //tao bo sinh so ngau nhien
     srand(time(NULL));
 
@@ -20,52 +30,55 @@ int main(){
     ShowCur(false);
 
     //tao duong dua
-    khoitao1(a);
+    initialize_racetrack(racetrack);
 
     //tao hinh dang,vi tri cac vat
-    khoitao(xe,vc);
+    initialize_location(car,dike,life);
 
-    //hien thi thong tin tro choi
-    gotoXY(55,12);
-    cout<<" Dan:      0";
-    gotoXY(55,13);
-    cout<<" SO VAT CAN QUA:    0";
-    gotoXY(55,14);
-    cout<<" MANG SONG:      0";
+    while (true)
+    {
+        car.addDem_CK_Dan(1);
+        car.addDem_CK_Life(1);
 
+        if(car.getDem_CK_Dan()>100)  //kiem tra xem da du thoi gian nap dan chua
+        {
+            car.addDan(1);
+            car.setAff(true,0);
+            car.setDem_CK_Dan(0);
+        }
+        if(car.getDem_CK_Life()>200&&car.getTocDo()>=25)
+        {
+            car.addTocDo(-5);
+            car.setDem_CK_Life(0);
+        }
 
-    while (1){
-        xe.tem++;
-
-        if(xe.tem>100) {//kiem tra xem da du thoi gian nap dan chua
-            xe.dan++;
-            xe.affirmation[0]=true;
-            xe.tem=0;
-                        }
         //update lai vi tri,hinh dang cac vat tren duong dua
-        Update(xe,vc,a);
+        drawing_table.Update(car,dike,life,racetrack);
 
         //hien thi tro choi
-        Display(xe,vc,a);
+        Display_game(car,racetrack);
 
         //xoa cac vat tren duong dua
-        Delete(xe,vc,a);
+        drawing_table.Delete(car,dike,life,racetrack);
 
         //choi game
-        Control(xe);
+        Control_car(car);
 
         //tam dung tro choi khi co lenh
-        dungtrochoi(xe);
+        pause_game(car);
 
         //xu ly game
-        xuly(vc,xe,a);
+        handle_car(car,dike,life);
 
         //xy ly lua chon cua nguoi choi khi thua cuoc
-        xulyluachon(xe,vc);
-        Sleep(50);
+        Solve_The_Selection(car,dike,life);
+
+        Sleep(car.getTocDo());
     }
 
 }
+
+
 
 
 
