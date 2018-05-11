@@ -1,6 +1,9 @@
-#ifndef _hamtienich
-#define _hamtienich
+#ifndef _HAMTIENICH
+#define _HAMTIENICH
+
 #include<windows.h>
+#include <stdio.h>
+#include <conio.h>
 #define key_Up		1072
 #define key_Down	1080
 #define key_Left	1075
@@ -21,7 +24,8 @@ int inputKey();
 
 //xoa man hinh
 void clrscr();
-#endif // _hamtienich
+#endif // _HAMTIENICH
+
 
 
 
