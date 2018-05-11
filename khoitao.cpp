@@ -1,50 +1,65 @@
 #include"khoitao.h"
-#include"cackieudulieumoi.h"
-#include"time.h"
-#include<stdlib.h>
-#define consoleHeight 25
-#define ROAD 41
-void khoitao1(char a[consoleHeight][ROAD+1]){
-	int i,j;
-	for(i=0;i<consoleHeight;i++)
-        for(j=1;j<ROAD-1;j++)
-            a[i][j]=32;
-    for(i=0;i<consoleHeight;i++){
-        a[i][0]=179;
-        a[i][ROAD-1]=179;
-        a[i][ROAD]='\n';
-    }
-    a[24][ROAD]='\0';
-	}
 
-void khoitao(xedua &xe,vatcan vc[3]){
+//huong dan dau game
+string Help()
+{
+    string chuthich[10],help;
+    chuthich[0]="SU DUNG CAC PHIM DI CHUYEN TREN BAN PHIM DE DIEU KHIEN XE\n";
+    chuthich[1]="\nHAY CO GANG VUOT QUA THAT NHIEU VAT CAN\n";
+    chuthich[2]="\nAN THAT NHIEU PHEP BO TRO LIFE DE KHONG SO VA CHAM\n";
+    chuthich[3]="\nMOI LAN VA CHAM MANG SONG GIAM DI 1\n";
+    chuthich[4]="\nKHI MANG SONG NHO HON 0 THI BAN DA THUA\n";
+    chuthich[5]="\nSAU MOT THOI GIAN XE SE TU DONG NAP DAN\n";
+    chuthich[6]="\nKHI NGUY HIEM HAY NHAN PHIM CACH DE BAN DAN\n";
+    chuthich[7]="\nNHAN PHIM \"S\" KHI MUON TAM DUNG TRO CHOI\n";
+    chuthich[8]="\n  CHU Y: CHOI CANG LAU TOC DO CANG NHANH\n\n";
+    chuthich[9]="\nNHAN PHIM \"A\" VA NHAN ERTER DE BAT DAU THUONG THUC GAME\n";
     int i;
-    //vi tri ban dau cua xe
-    xe.td.line=consoleHeight-3;
-    xe.td.column=ROAD/2+1;
+    for(i=0; i<10; i++)
+        help+=chuthich[i];
+    return help;
 
-    //hinh dang xe
-    xe.hd.a[0][1]='^';
-    xe.hd.a[0][0]='0';
-    xe.hd.a[0][2]='0';
-    xe.hd.a[2][0]='0';
-    xe.hd.a[2][2]='0';
-    xe.hd.a[1][0]='|';
-    xe.hd.a[1][1]='X';
-    xe.hd.a[2][1]='-';
-    xe.hd.a[1][2]='|';
+}
 
-    //vi tri ban dau cua cac vat can
-    for(i=0;i<=2;i++)
+//tao duong dua
+void initialize_racetrack(char racetrack[consoleHeight][ROAD+1])
+{
+    int i,j;
+    //tao khoang trong duong dua
+    for(i=0; i<consoleHeight; i++)
+        for(j=1; j<ROAD-1; j++)
+            racetrack[i][j]=32;
+    //tao duong bien
+    for(i=0; i<consoleHeight; i++)
     {
-        vc[i].td.column=3+rand()%(ROAD-4);
-        ;
-        vc[i].td.line=-2-i*7;
+        racetrack[i][0]=179;
+        racetrack[i][ROAD-1]=179;
+        racetrack[i][ROAD]='\n';
+    }
+    racetrack[24][ROAD]='\0';
+}
+
+//tao hinh dang vi tri cac vat
+void initialize_location(Race_Car &car,hindrance dike[3],hindrance &life)
+{
+    int i;
+    // tao vi tri ban dau cua xe
+    car.setCoordinate(ROAD/2+1,consoleHeight-3);
+
+    // tao hinh dang xe
+    car.setShape();
+
+    // tao vi tri ban dau cua cac vat can
+    for(i=0; i<=2; i++)
+    {
+        dike[i].td.column=3+rand()%(ROAD-4);
+        dike[i].td.row=-2-i*7;
     }
 
-    //vi tri ban dau cua phep bo tro life
-    vc[1].td2.column=4+rand()%(ROAD-6);
-    vc[1].td2.line=-50;
- }
+    // tao vi tri ban dau cua phep bo tro life
+    life.td.column=4+rand()%(ROAD-6);
+    life.td.row=-50;
+}
+
 
 
