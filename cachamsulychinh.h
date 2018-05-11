@@ -1,27 +1,27 @@
-#ifndef _cachamxulygamechinh
-#define _cachamxulygamechinh
-#include"cackieudulieumoi.h"
-#define ROAD 41
-//update lai vi tri cac vat tren duong dua
-void Update(xedua &,const vatcan*,char (*)[ROAD+1] );
+#ifndef _CACHAMXULYXECHINH
+#define _CACHAMXULYXECHINH
 
-//xoa cac vat tren duong dua
-void Delete(xedua &, const vatcan*,char(*)[ROAD+1] );
-
+#include<iostream>
+#include<string.h>
+#include<stdlib.h>
+#include"kieudulieumoi.h"
+#include"hamtienich.h"
+using namespace std;
 //hien thi tro choi
-void Display( xedua &,const vatcan*,char(*)[ROAD+1] );
+void Display_game( Race_Car &,char(*)[ROAD+1] );
 
 //dieu khien xe di chuyen
-void Control(xedua &);
+void Control_car(Race_Car &);
 
 //tao su di chuyen cac vat,kiem tra su dung do,game over
-void xuly(vatcan* ,xedua &,char(*)[ROAD+1] );
+void handle_car(Race_Car &,hindrance*,hindrance & );
 
 // xu ly lua chon khi thua cuoc
-void xulyluachon(xedua&,vatcan*);
+void Solve_The_Selection(Race_Car &,hindrance*,hindrance &);
 
 //tam dung tro choi
-void dungtrochoi(xedua&);
-#endif // _cachamxulygamechinh
+void pause_game(Race_Car &);
+#endif // _CACHAMXULYXECHINH
+
 
 
