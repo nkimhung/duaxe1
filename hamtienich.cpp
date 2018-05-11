@@ -1,10 +1,12 @@
-#include <stdio.h>
-#include <conio.h>
 #include"hamtienich.h"
+
+//cai dat mau ki tu va mau nen ki tu
 void TextColor (int color)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE) , color);
 }
+
+//dua con tro toi vi tri tuong ung tren man hinh
  void gotoXY(int column,int line)
 {
 
@@ -14,12 +16,16 @@ void TextColor (int color)
 	coord.Y = line;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),coord);
 }
+
+//cai dat viec an hien con tro tren man hinh
 void ShowCur(bool CursorVisibility)
 {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cursor = {1, CursorVisibility};
     SetConsoleCursorInfo(handle, &cursor);
 }
+
+//dua ra ma ki tu nhap vao
 int inputKey()
 {
 	if (_kbhit())
@@ -41,6 +47,8 @@ int inputKey()
 
 	return key_none;
 }
+
+//xoa man hinh
 void clrscr()
 {
 	CONSOLE_SCREEN_BUFFER_INFO	csbiInfo;
@@ -56,6 +64,7 @@ void clrscr()
 	csbiInfo.dwCursorPosition.Y = 0;
 	SetConsoleCursorPosition(hConsoleOut,csbiInfo.dwCursorPosition);
 }
+
 
 
 
